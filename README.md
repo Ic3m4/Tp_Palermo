@@ -9,7 +9,7 @@ Trabajo practico integrador grupal – VM en Debian – Junio 2025
 ###################################################################################################
 ########
 Universidad de Palermo
-Autor = Jonatan Rios 
+Autor = Jonatan Rios , Jose Quesada, Guido Tombacco.
 
 #######
 ####################################################################################################
