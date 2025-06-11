@@ -1,0 +1,46 @@
+"$1" == "help" ]; then
+     echo "Uso: $0 origen destino"
+     echo "Ejemplo: $0 /var/log/backup_dir"
+     exit 0
+
+fi
+
+
+#validar que se pasen dos argumentos
+if [ $# -ne 2 ]; then
+   echo " Error: debe ingresar origen y destino"
+   echo "Ejemplo: $0 /var/log/backup_dir"
+   exit 1
+
+fi
+
+origen=$1
+destino=$2
+
+#validar que origen existe y esta montado
+if ! mountpoint -q "$origen" && [ ! -d "origen" ]; then
+  echo "error: el directorio origen no existe o no esta montado"
+  exit 1
+
+fi
+
+#validar que destino existe y esta montado
+if ! mountpoint -q "$destino" && [ ! -d "destino" ]; then
+ echo "error: el directorio destino no existe o no esta montado"
+exit 1
+
+fi
+
+fecha=$(date +%Y%m%d)
+
+#obtener el nombre base del directorio origen paa usarlo en el archivo
+nombre_origen=$(basename "$origen")
+
+archivo_backup="${destino}/${nombre_origen}_bkp_${fecha}.tar.gz"
+:
+echo "creando backup de $origen en $archivo_backup..."
+
+tar -czf "$archivo_backup" "origen"
+
+if [ $? -eq 0 ]; then
+ echo "backup realizado c
